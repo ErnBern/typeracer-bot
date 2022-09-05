@@ -87,7 +87,7 @@ with open ('keybinds.txt', 'r') as file:
     end_keybind = keybinds[2].strip()
 
 
-ser = Service('C:\Program Files (x86)\chromedriver.exe')
+ser = Service('Enter Your Chrome Driver Path')
 op = webdriver.ChromeOptions()
 driver = webdriver.Chrome(service=ser, options=op)
 
