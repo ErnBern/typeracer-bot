@@ -77,6 +77,7 @@ with open ('keybinds.txt', 'r') as file:
             start = input("To change your keybinds enter change or to start type start:\n")
             if start.lower() == 'change': 
                 keybind()
+                #Updates the keybinds list
                 with open('keybinds.txt', 'r') as file:
                     keybinds = file.readlines()
             elif start.lower() != 'start': print('Invalid Input')
