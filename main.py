@@ -115,7 +115,7 @@ while loop == True:
             time.sleep(0.045)
             wordInput.send_keys(word)
             #Stops the bot
-            if keyboard.is_pressed(stop_keybind): break
+            if keyboard.is_pressed(stop_keybind): continue
             #Stops the program
             if keyboard.is_pressed(end_keybind):
                 driver.close()
