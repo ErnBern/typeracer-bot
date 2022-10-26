@@ -1,0 +1,6 @@
+pynput
+pyautogui
+keyboard
+selenium
+webdriver_manager
+bs4

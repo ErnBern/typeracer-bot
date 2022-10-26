@@ -8,25 +8,151 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
-from time import sleep
+from time import perf_counter, sleep
 import random
-import keyboard, time
+import keyboard
+import time
 
 #These two values determines the First Speed (Determines the lowest value while calculating for speed in x)
-fastTestSpeed_rand1 = 0.01 # Lower is better
-fastTestSpeed_rand2 = 0.01 # Make it same with rand1 if you want the fastest
-
-#These two values determines the Second Speed (Determines the highest value while calculating for speed in x)
-FastSlowSpeed_rand1 = 0.06 # Higher is slower
-SlowestSpeed_rand2  = 0.1 # Make all the value the same if you want the maximum speed :)
-
 
 #These two values should be lower and higher than the    other or same not the other way around
 mistake_range_lower = 18    # Lower the value the higher your mistakes will be
 mistake_range_higher = 22   # Higher the value the less your mistakes will be
+while True:
+    try:
+        Speed = int(input('''
+Remember this are all calculated using no mistakes!
+0 :- Searching for hentai 400wpm+
+1 :- Ultra Super Instinct 250wpm+
+2 :- Super Instinct 200wpm+
+3 :- Spiderman going to rescue 180wpm+
+4 :- Fast 160wpm+
+5 :- CHAD 140wpm+
+6 :- Mediocre 120wpm+
+7 :- Slow 100wpm+
+8 :- Super Snail 80wpm+
+9 :- Noob Snail 60wpm+
+Enter your choice for typinh speed :- '''))
+        if Speed >9 or Speed <0:
+            print("\nInvalid Input")
+            continue
+    except:
+        print("\nInvalid Input")
+        continue
+    else:
+        break
 
-username = 'dirtyfellow'
-password = 'asdfasdf123'
+while True:
+    try:
+        Mistakes = int(input('''
+0 :- No mistakes
+1 :- a very few mistakes
+2 :- few mistakes
+3 :- a little more mistakes
+4 :- more mistakes
+5 :- even more mistakes
+6 :- Quite a lot of Mistakes
+7 :- Alot of Mistakes
+8 :- SOOO MANY MISTAKES I CAN"T TYPEEE AHHHH
+Enter your choice for misatkes :- '''))
+        if Mistakes >8 or Mistakes <0:
+            print("\nInvalid Input")
+            continue
+    except:
+        print("\nInvalid Input")
+        continue
+    else:
+        break
+
+
+if Speed == 0:
+    fastTestSpeed_rand1 = 0.001
+    fastTestSpeed_rand2 = 0.001
+    FastSlowSpeed_rand1 = 0.001
+    SlowestSpeed_rand2  = 0.001
+elif Speed == 1:
+    fastTestSpeed_rand1 = 0.005
+    fastTestSpeed_rand2 = 0.01
+    FastSlowSpeed_rand1 = 0.01
+    SlowestSpeed_rand2  = 0.04
+elif Speed == 2:
+    fastTestSpeed_rand1 = 0.01
+    fastTestSpeed_rand2 = 0.03
+    FastSlowSpeed_rand1 = 0.03
+    SlowestSpeed_rand2  = 0.06
+elif Speed == 3:
+    fastTestSpeed_rand1 = 0.01
+    fastTestSpeed_rand2 = 0.04
+    FastSlowSpeed_rand1 = 0.04
+    SlowestSpeed_rand2  = 0.07
+elif Speed == 4:
+    fastTestSpeed_rand1 = 0.01
+    fastTestSpeed_rand2 = 0.04
+    FastSlowSpeed_rand1 = 0.05
+    SlowestSpeed_rand2  = 0.08
+elif Speed == 5:
+    fastTestSpeed_rand1 = 0.03
+    fastTestSpeed_rand2 = 0.06
+    FastSlowSpeed_rand1 = 0.07
+    SlowestSpeed_rand2  = 0.1
+elif Speed == 6:
+    fastTestSpeed_rand1 = 0.04
+    fastTestSpeed_rand2 = 0.07
+    FastSlowSpeed_rand1 = 0.07
+    SlowestSpeed_rand2  = 0.11
+elif Speed == 7:
+    fastTestSpeed_rand1 = 0.05
+    fastTestSpeed_rand2 = 0.08
+    FastSlowSpeed_rand1 = 0.09
+    SlowestSpeed_rand2  = 0.14
+elif Speed == 8:
+    fastTestSpeed_rand1 = 0.07
+    fastTestSpeed_rand2 = 0.11
+    FastSlowSpeed_rand1 = 0.12
+    SlowestSpeed_rand2  = 0.18
+elif Speed == 9:
+    fastTestSpeed_rand1 = 0.08
+    fastTestSpeed_rand2 = 0.14
+    FastSlowSpeed_rand1 = 0.19
+    SlowestSpeed_rand2  = 0.24
+
+
+if Mistakes == 0:
+    mistake_range_lower = 1000000
+    mistake_range_higher = 1000000
+    contain_mistakes = False
+elif Mistakes == 1:
+    mistake_range_lower =  100
+    mistake_range_higher = 200
+    contain_mistakes = True
+elif Mistakes == 2:
+    mistake_range_lower = 35
+    mistake_range_higher = 40
+    contain_mistakes = True
+elif Mistakes == 3:
+    mistake_range_lower = 26
+    mistake_range_higher = 30
+    contain_mistakes = True
+elif Mistakes == 4:
+    mistake_range_lower = 22
+    mistake_range_higher = 26
+    contain_mistakes = True
+elif Mistakes == 5:
+    mistake_range_lower =  16
+    mistake_range_higher = 20
+    contain_mistakes = True
+elif Mistakes == 6:
+    mistake_range_lower = 10
+    mistake_range_higher = 14
+    contain_mistakes = True
+elif Mistakes == 7:
+    mistake_range_lower = 5
+    mistake_range_higher = 7
+    contain_mistakes = True
+elif Mistakes == 8:
+    mistake_range_lower = 1
+    mistake_range_higher = 1
+    contain_mistakes = True
 
 #Xpaths
 Sign_in = '//*[@id="userInfo"]/div/div[2]/div[2]/div[1]/a[2]'
@@ -122,15 +248,14 @@ options.add_argument("--start-maximized")
 driver = webdriver.Chrome(service=ser, options=options)
 action = ActionChains(driver)
 
-
-def login():
-    driver.find_element(By.XPATH,Sign_in).click()
-    time.sleep(0.05)
-    driver.find_element(By.XPATH, username_xpath).send_keys(username)
-    time.sleep(0.05)
-    driver.find_element(By.XPATH, password_xpath).send_keys(password)
-    time.sleep(0.05)
-    driver.find_element(By.XPATH,Sign_in_btn).click()
+# def login():
+#     driver.find_element(By.XPATH,Sign_in).click()
+#     time.sleep(0.05)
+#     driver.find_element(By.XPATH, username_xpath).send_keys(username)
+#     time.sleep(0.05)
+#     driver.find_element(By.XPATH, password_xpath).send_keys(password)
+#     time.sleep(0.05)
+#     driver.find_element(By.XPATH,Sign_in_btn).click()
 
 def random_nums():
     y = random.randint(6,leng_txt)
@@ -146,34 +271,30 @@ def get_random_g():
     g = random.uniform(FastSlowSpeed_rand1,SlowestSpeed_rand2)
     return g
 
-
 driver.get("https://play.typeracer.com/")
-sleep(2)
-login()
 
 loop = True
 play = False
-contain_mistakes = True
 AutoRun = False
 
 while loop == True:
-    #Starts the bot
-    if keyboard.is_pressed(start_keybind): play = True
+    if keyboard.is_pressed(start_keybind): 
+        play = True
+    sleep(0.1)
     if play == True:
+        print(play)
         #Gets the words
-        src = driver.page_source
+        driver.set_script_timeout(5)
+        driver.set_page_load_timeout(5)
+        src=driver.page_source
         soup = BeautifulSoup(src, "html.parser")
         text = ''
         span = soup.findAll("span")
         for i in span:
             if "unselectable" in str(i):
                 text += i.text
-        try:
-            wordInput = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.CLASS_NAME, "txtInput")))
-            wordInput.clear()
-        except:
-            play == False
-        # print(text)
+        wordInput = WebDriverWait(driver, 15).until(EC.element_to_be_clickable((By.CLASS_NAME, "txtInput")))
+        wordInput.clear()
         if contain_mistakes == True:
             leng_txt = len(text) # space is also counted as charact/,/er
             rnd = random.randint(mistake_range_lower,mistake_range_higher)
@@ -192,10 +313,10 @@ while loop == True:
         for index,word in enumerate(text, start=1):
             x = random.uniform(get_random_f(),get_random_g())
             txt_to_list = text.split(' ')
-            store_keys.append(word)
             time.sleep(x)
             wordInput.send_keys(word)
             if contain_mistakes == True:
+                store_keys.append(word)
                 prev_word_str = "".join(store_keys)
                 prev_word_split = prev_word_str.split(' ')
                 prev_word = prev_word_split[-1]
@@ -255,13 +376,13 @@ while loop == True:
                             for _ in range(1,y):
                                 sleep(0.09)
                                 wordInput.send_keys(Keys.BACKSPACE)
-            if keyboard.is_pressed(stop_keybind): 
-                continue
+            if keyboard.is_pressed(stop_keybind): continue
             #Stops the program
             if keyboard.is_pressed(end_keybind):
                 driver.close()
-                exit()
+                exit()    
         play = False
     if keyboard.is_pressed(end_keybind):
         driver.close()
         exit()
+
