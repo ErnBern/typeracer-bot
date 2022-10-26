@@ -104,7 +104,7 @@ elif Speed == 7:
     fastTestSpeed_rand1 = 0.05
     fastTestSpeed_rand2 = 0.08
     FastSlowSpeed_rand1 = 0.09
-    SlowestSpeed_rand2  = 0.14
+    SlowestSpeed_rand2  = 0.13
 elif Speed == 8:
     fastTestSpeed_rand1 = 0.07
     fastTestSpeed_rand2 = 0.11
@@ -282,7 +282,6 @@ while loop == True:
         play = True
     sleep(0.1)
     if play == True:
-        print(play)
         #Gets the words
         driver.set_script_timeout(5)
         driver.set_page_load_timeout(5)
